@@ -7,7 +7,7 @@ private float Pack_Weight;
 private float Cost;
 private String Sender_addr;
 private String Receiver_addr;
-private int Emp_id ;
+private int Emp_id;
 private int User_id;
 private String Curr_loc;
 private String Pack_status;

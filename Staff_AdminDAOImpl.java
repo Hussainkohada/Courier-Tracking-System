@@ -1,24 +1,20 @@
 package DAO;
 import java.sql.Connection;
-import java.sql.DriverManager;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.*;
 
+import Model.ConnectionClass;
 import Model.Staff_Admin;
 
 public class Staff_AdminDAOImpl implements Staff_AdminDAO {
 	public void create_SADet(Staff_Admin obj)throws ClassNotFoundException, SQLException{
 		
 		try {
-			ResourceBundle rb= ResourceBundle.getBundle("mysql");
-		    String url=rb.getString("db.url");
-		    String user=rb.getString("db.username");
-		    String pass=rb.getString("db.password");
-		    Class.forName("com.mysql.jdbc.Driver");
-		    Connection con = DriverManager.getConnection(url,user,pass);
+			Connection con = ConnectionClass.getConnection();
 		    String qry="Insert into Staff_Admin values(?,?,?,?,?,?,?,?,?,?,?,?)";
 		    PreparedStatement ps=con.prepareStatement(qry);
 		    
@@ -45,15 +41,10 @@ public class Staff_AdminDAOImpl implements Staff_AdminDAO {
 	
 	public void Update_SADet(Staff_Admin obj) throws ClassNotFoundException, SQLException{
 		try {
-			ResourceBundle rb= ResourceBundle.getBundle("mysql");
-		    String url=rb.getString("db.url");
-		    String user=rb.getString("db.username");
-		    String pass=rb.getString("db.password");
-		    Class.forName("com.mysql.jdbc.Driver");
-		    Connection con = DriverManager.getConnection(url,user,pass);
-		    String qry="Update set Staff_Admin String f_name=?, String l_name=?, String gender=?, String e_Mail=?, long contact_num=?, String userId=?,\r\n" + 
-		    		"String password=?, int salaray=?, String designation=?, String pmt_Address=?, String corresp_Address=?,\r\n" + 
-		    		"String login_type=? where userId="+obj.getUserId();
+			Connection con = ConnectionClass.getConnection();
+		    String qry="Update set Staff_Admin First Name=?, Last Name=?, Gender=?, Email=?,Contact Number=?,UserId=?,\r\n" + 
+		    		"Password=?,Salary=?,Designation=?,Permanent Address=?,Correspondance Address=?,\r\n" + 
+		    		"Login Type=? where UserId="+obj.getUserId();
 		    PreparedStatement ps=con.prepareStatement(qry);
 		    
 		    ps.setString(1, obj.getF_name());
@@ -80,13 +71,8 @@ public class Staff_AdminDAOImpl implements Staff_AdminDAO {
 	public Staff_Admin getSADetbyId(int SA_id) throws ClassNotFoundException, SQLException{
 	Staff_Admin obj=new Staff_Admin();
 		try {
-			ResourceBundle rb= ResourceBundle.getBundle("mysql");
-		    String url=rb.getString("db.url");
-		    String user=rb.getString("db.username");
-		    String pass=rb.getString("db.password");
-		    Class.forName("com.mysql.jdbc.Driver");
-		    Connection con = DriverManager.getConnection(url,user,pass);
-		    String qry="Select * from Staff_Admin where userId="+SA_id;
+			Connection con = ConnectionClass.getConnection();
+		    String qry="Select * from Staff_Admin where UserId="+SA_id;
 		    Statement stmt=con.createStatement();
 		    ResultSet rs=stmt.executeQuery(qry);
 		    while(rs.next()) {
@@ -113,12 +99,8 @@ public class Staff_AdminDAOImpl implements Staff_AdminDAO {
 	public List<Staff_Admin> SA_ViewDet() throws ClassNotFoundException, SQLException{
 		List<Staff_Admin> SA_View=new ArrayList<>();
 		try {
-		ResourceBundle rb= ResourceBundle.getBundle("mysql");
-	    String url=rb.getString("db.url");
-	    String user=rb.getString("db.username");
-	    String pass=rb.getString("db.password");
-	    Class.forName("com.mysql.jdbc.Driver");
-	    Connection con = DriverManager.getConnection(url,user,pass);
+		
+		Connection con = ConnectionClass.getConnection();
 		String qry="Select * from Staff_Admin";
 		Statement stmt=con.createStatement();
 		ResultSet rs=stmt.executeQuery(qry);

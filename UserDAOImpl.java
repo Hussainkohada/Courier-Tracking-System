@@ -1,4 +1,5 @@
 package DAO;
+import Model.ConnectionClass;
 import Model.User;
 import java.util.*;
 import java.sql.*;
@@ -6,12 +7,7 @@ public class UserDAOImpl implements UserDAO {
 
 public void Create_UserDet(User u_obj) throws ClassNotFoundException, SQLException {
 	try { 
-	    ResourceBundle rb= ResourceBundle.getBundle("mysql");
-	    String url=rb.getString("db.url");
-	    String user=rb.getString("db.username");
-	    String pass=rb.getString("db.password");
-	    Class.forName("com.mysql.jdbc.Driver");
-	    Connection con = DriverManager.getConnection(url,user,pass);
+		Connection con = ConnectionClass.getConnection();
 		String qry="Insert into User values(?,?,?,?,?,?,?)";
 		PreparedStatement ps=con.prepareStatement(qry);
 		
@@ -35,14 +31,9 @@ public void Create_UserDet(User u_obj) throws ClassNotFoundException, SQLExcepti
 
 public void Update_UserDet(User u_obj)  throws ClassNotFoundException, SQLException{
 	try {
-		 	ResourceBundle rb= ResourceBundle.getBundle("mysql");
-		    String url=rb.getString("db.url");
-		    String user=rb.getString("db.username");
-		    String pass=rb.getString("db.password");
-		    Class.forName("com.mysql.jdbc.Driver");
-		    Connection con = DriverManager.getConnection(url,user,pass);
+		Connection con = ConnectionClass.getConnection();
 		    String qry="Update User set First Name=?,Last Name=?,Gender=?,Email=?,Contact Number=?,UserId=?,"
-		    		+ "Password=? where userId="+u_obj.getUserId();
+		    		+ "Password=? where UserId="+u_obj.getUserId();
 		    PreparedStatement ps=con.prepareStatement(qry);
 		    
 			ps.setString(1, u_obj.getF_name());
@@ -66,13 +57,8 @@ public void Update_UserDet(User u_obj)  throws ClassNotFoundException, SQLExcept
 public User ViewUserbyId(int u_id) throws ClassNotFoundException, SQLException{
 	User u_obj=new User();
 	try {
-		ResourceBundle rb= ResourceBundle.getBundle("mysql");
-	    String url=rb.getString("db.url");
-	    String user=rb.getString("db.username");
-	    String pass=rb.getString("db.password");
-	    Class.forName("com.mysql.jdbc.Driver");
-	    Connection con = DriverManager.getConnection(url,user,pass);
-		String qry="Select * from User where userId="+u_id;
+		Connection con = ConnectionClass.getConnection();
+		String qry="Select * from User where UserId="+u_id;
 		Statement stmt=con.createStatement();
 		ResultSet rs=stmt.executeQuery(qry);
 	
@@ -102,12 +88,7 @@ public List<User> ListAllUsers() throws ClassNotFoundException, SQLException{
 	List<User> Users_View=new ArrayList<>(); 
 	try{
 		
-	ResourceBundle rb= ResourceBundle.getBundle("mysql");
-	String url=rb.getString("db.url");
-    String user=rb.getString("db.username");
-    String pass=rb.getString("db.password");
-    Class.forName("com.mysql.jdbc.Driver");
-    Connection con = DriverManager.getConnection(url,user,pass);
+		Connection con = ConnectionClass.getConnection();
 	String qry="Select * from User";
 	Statement stmt=con.createStatement();
 	ResultSet rs=stmt.executeQuery(qry);
@@ -129,43 +110,4 @@ public List<User> ListAllUsers() throws ClassNotFoundException, SQLException{
 	return Users_View;
 	}
 
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

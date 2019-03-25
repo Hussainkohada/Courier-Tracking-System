@@ -2,17 +2,16 @@ package DAO;
 import java.util.*;
 import java.sql.*;
 import java.sql.Date;
+
+import Model.ConnectionClass;
 import Model.Package;
+
 public class PackageDAOImpl implements PackageDAO {
 	
-		public void create_Package(Package obj) throws SQLException, ClassNotFoundException {
+	public void create_Package(Package obj) throws SQLException, ClassNotFoundException {
+		
 		try {
-		ResourceBundle rb= ResourceBundle.getBundle("mysql");
-	    String url=rb.getString("db.url");
-	    String user=rb.getString("db.username");
-	    String pass=rb.getString("db.password");
-	    Class.forName("com.mysql.jdbc.Driver");
-	    Connection con = DriverManager.getConnection(url,user,pass);
+			Connection con = ConnectionClass.getConnection();
 	    String qry="Insert into Package values(?,?,?,?,?,?,?,?,?,?)";
 	    PreparedStatement ps=con.prepareStatement(qry);
 	    
@@ -35,15 +34,10 @@ public class PackageDAOImpl implements PackageDAO {
 	}
 		}
 		
-		public void update_PackageDet(Package obj) throws SQLException, ClassNotFoundException {
+	public void update_PackageDet(Package obj) throws SQLException, ClassNotFoundException {
 		
 			try {
-				ResourceBundle rb= ResourceBundle.getBundle("mysql");
-			    String url=rb.getString("db.url");
-			    String user=rb.getString("db.username");
-			    String pass=rb.getString("db.password");
-			    Class.forName("com.mysql.jdbc.Driver");
-			    Connection con = DriverManager.getConnection(url,user,pass);
+				Connection con = ConnectionClass.getConnection();
 			    String qry="Update set Package Consignment_id=?,Accept Date=?,Package Weight=?,Cost=?,Sender Address=?,Receiver Address=?,"
 			    		+ "Employee_id=?,Customer_id=?,Current Location=?,Package Status=? where Employee_id="+obj.getEmp_id();
 				PreparedStatement ps=con.prepareStatement(qry);
@@ -66,15 +60,10 @@ public class PackageDAOImpl implements PackageDAO {
 			}
 		}
 		
-		public Package getPackageById(int empid) throws SQLException, ClassNotFoundException{
+	public Package getPackageById(int empid) throws SQLException, ClassNotFoundException{
 			Package obj=new Package();
 			try {
-				ResourceBundle rb= ResourceBundle.getBundle("mysql");
-			    String url=rb.getString("db.url");
-			    String user=rb.getString("db.username");
-			    String pass=rb.getString("db.password");
-			    Class.forName("com.mysql.jdbc.Driver");
-			    Connection con = DriverManager.getConnection(url,user,pass);
+				Connection con = ConnectionClass.getConnection();
 			    String qry="Select * from Package where Employee_id="+empid;
 			    Statement stmt=con.createStatement();
 			    ResultSet rs=stmt.executeQuery(qry);
@@ -98,19 +87,14 @@ public class PackageDAOImpl implements PackageDAO {
 			return obj;
 		}
 		
-		public List<Package> getAllPackages() throws SQLException,ClassNotFoundException{
+	public List<Package> getAllPackages() throws SQLException,ClassNotFoundException{
 			List<Package> pack_List=new ArrayList<>();
 			try {
-			ResourceBundle rb= ResourceBundle.getBundle("mysql");
-			String url=rb.getString("db.url");
-		    String user=rb.getString("db.username");
-		    String pass=rb.getString("db.password");
-		    Class.forName("com.mysql.jdbc.Driver");
-		    Connection con = DriverManager.getConnection(url,user,pass);
-		    String qry="Select * from Package";
-		    Statement stmt=con.createStatement();
-		    ResultSet rs=stmt.executeQuery(qry);
-		    while(rs.next()) {
+				Connection con = ConnectionClass.getConnection();
+				String qry="Select * from Package";
+				Statement stmt=con.createStatement();
+				ResultSet rs=stmt.executeQuery(qry);
+				while(rs.next()) {
 		    	int consign_id=rs.getInt(1);
 		    	Date accept_date=rs.getDate(2);
 		    	float pack_Weight=rs.getFloat(3); 
@@ -128,9 +112,4 @@ public class PackageDAOImpl implements PackageDAO {
 			}								
 			return pack_List;
 		}
-		
-		
-		
-	
-	
 }
