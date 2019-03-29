@@ -7,9 +7,9 @@ public class Staff_Admin {
 	private String Gender;
 	private String E_Mail;
 	private long Contact_num;
-	private int userId;
+	private String userId;
 	private String Password;
-	private int Salaray;
+	private int Salary;
 	private String Designation;
 	private String Pmt_Address;
 	private String Corresp_Address;
@@ -44,10 +44,10 @@ public class Staff_Admin {
 	public void setContact_num(long contact_num) {
 		Contact_num = contact_num;
 	}
-	public int getUserId() {
+	public String getUserId() {
 		return userId;
 	}
-	public void setUserId(int userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 	public String getPassword() {
@@ -56,11 +56,11 @@ public class Staff_Admin {
 	public void setPassword(String password) {
 		Password = password;
 	}
-	public int getSalaray() {
-		return Salaray;
+	public int getSalary() {
+		return Salary;
 	}
-	public void setSalaray(int salaray) {
-		Salaray = salaray;
+	public void setSalary(int salaray) {
+		Salary = salaray;
 	}
 	public String getDesignation() {
 		return Designation;
@@ -86,8 +86,8 @@ public class Staff_Admin {
 	public void setLogin_type(String login_type) {
 		Login_type = login_type;
 	}
-	public Staff_Admin(String f_name, String l_name, String gender, String e_Mail, long contact_num, int userId,
-			String password, int salaray, String designation, String pmt_Address, String corresp_Address,
+	public Staff_Admin(String f_name, String l_name, String gender, String e_Mail, long contact_num, String userId,
+			String password, int salary, String designation, String pmt_Address, String corresp_Address,
 			String login_type) {
 		super();
 		F_name = f_name;
@@ -97,7 +97,7 @@ public class Staff_Admin {
 		Contact_num = contact_num;
 		this.userId = userId;
 		Password = password;
-		Salaray = salaray;
+		Salary = salary;
 		Designation = designation;
 		Pmt_Address = pmt_Address;
 		Corresp_Address = corresp_Address;

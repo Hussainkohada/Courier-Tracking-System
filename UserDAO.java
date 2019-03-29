@@ -10,4 +10,6 @@ public interface UserDAO {
 	public void Update_UserDet(User u_obj) throws ClassNotFoundException, SQLException;
 	public User ViewUserbyId(int u_id) throws ClassNotFoundException, SQLException;
 	public List<User> ListAllUsers() throws ClassNotFoundException, SQLException;
+	public boolean checkLoginField(String u_id,String pwd);
+	public int getCustomerId();
 }

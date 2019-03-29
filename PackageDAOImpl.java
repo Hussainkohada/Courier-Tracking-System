@@ -15,7 +15,8 @@ public class PackageDAOImpl implements PackageDAO {
 	    String qry="Insert into Package values(?,?,?,?,?,?,?,?,?,?)";
 	    PreparedStatement ps=con.prepareStatement(qry);
 	    
-	    ps.setInt(1,obj.getConsign_id());
+	   
+	    ps.setInt(1, obj.getConsign_id());
 	    ps.setDate(2, obj.getAccept_date());
 	    ps.setFloat(3, obj.getPack_Weight());
 	    ps.setFloat(4, obj.getCost());
@@ -23,8 +24,9 @@ public class PackageDAOImpl implements PackageDAO {
 	    ps.setString(6, obj.getReceiver_addr());
 	    ps.setInt(7, obj.getEmp_id());
 	    ps.setInt(8, obj.getUser_id());
-		ps.setString(9, obj.getCurr_loc());
-		ps.setString(10, obj.getPack_status());
+	    ps.setString(9, obj.getCurr_loc());
+	    ps.setString(10, obj.getPack_status());
+
 		
 		int count=ps.executeUpdate();
 		System.out.println(count+" Row(s) Inserted");
@@ -33,7 +35,19 @@ public class PackageDAOImpl implements PackageDAO {
 		System.out.println("Exception : "+E);
 	}
 		}
-		
+	@Override
+	public void update_StatusofPackage(String Status,int Consign_Id) throws SQLException, ClassNotFoundException {
+	try {	System.out.println(Status+"    "+ Consign_Id);
+		Connection con = ConnectionClass.getConnection();
+		String qry="Update Package set Package_Status='"+Status+"' where Consignment_Id="+Consign_Id;
+		PreparedStatement ps=con.prepareStatement(qry);
+		int count=ps.executeUpdate();
+		System.out.println(count+" Row(s) Updated");
+	}catch(Exception E) {
+		System.out.println("Error "+E);
+	} 
+	}
+	
 	public void update_PackageDet(Package obj) throws SQLException, ClassNotFoundException {
 		
 			try {
@@ -50,8 +64,9 @@ public class PackageDAOImpl implements PackageDAO {
 			    ps.setString(6, obj.getReceiver_addr());
 			    ps.setInt(7, obj.getEmp_id());
 			    ps.setInt(8, obj.getUser_id());
-				ps.setString(9, obj.getCurr_loc());
-				ps.setString(10, obj.getPack_status());
+			    ps.setString(9, obj.getCurr_loc());
+			    ps.setString(10, obj.getPack_status());
+				
 				
 				int count=ps.executeUpdate();
 				System.out.println(count+" Row(s) Updated");
@@ -60,11 +75,11 @@ public class PackageDAOImpl implements PackageDAO {
 			}
 		}
 		
-	public Package getPackageById(int empid) throws SQLException, ClassNotFoundException{
+	public Package getPackageById(int consgnid) throws SQLException, ClassNotFoundException{
 			Package obj=new Package();
 			try {
 				Connection con = ConnectionClass.getConnection();
-			    String qry="Select * from Package where Employee_id="+empid;
+			    String qry="Select * from Package where Consignment_Id="+consgnid;
 			    Statement stmt=con.createStatement();
 			    ResultSet rs=stmt.executeQuery(qry);
 			    while(rs.next()) {
@@ -112,4 +127,22 @@ public class PackageDAOImpl implements PackageDAO {
 			}								
 			return pack_List;
 		}
+	
+	public int getConsignId() {
+		int id=0;
+		try {
+			Connection con = ConnectionClass.getConnection();
+			String qry="Select Consignment_Id from Package";
+			Statement stmt=con.createStatement();
+			ResultSet rs=stmt.executeQuery(qry);
+			rs.last();
+			id=rs.getInt(1);
+			if(id==0) id=35425745;
+			}catch(Exception E) {
+			System.out.println("Exception E");
+		}
+	return (id+1);
+	}
+
+	
 }

@@ -8,4 +8,6 @@ public interface PackageDAO {
 	public void update_PackageDet(Package obj) throws SQLException, ClassNotFoundException;
 	public Package getPackageById(int empid) throws SQLException, ClassNotFoundException;
 	public List<Package> getAllPackages() throws SQLException,ClassNotFoundException;
+	public int getConsignId();
+	public void update_StatusofPackage(String Status,int Consign_Id)throws SQLException,ClassNotFoundException;
 }
