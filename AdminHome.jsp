@@ -9,7 +9,7 @@
 </head>
 <body>
 <a href="PackageBook.jsp">Click Here to Register Package</a>
-<a href="UpdateStatus_Location.jsp">Click Here to Update Location & Delivery Status of Package</a>
-
+<a href="#">Click Here to Update Location of Package</a>
+<a href="#">Click Here to Update Delivery Status of Package</a>
 </body>
 </html>
