@@ -8,7 +8,7 @@
 <h1>Welcome to Staff Page</h1>
 </head>
 <body>
-<a href="PackageBook.jsp">Click Here to Register Package</a>
-<a href="UpdateDeliveryStatus.jsp">Click Here to Update Delivery Status of Package</a>
+<br/> <a href="PackageBook.jsp">Click Here to Register Package</a>
+<br/> <a href="UpdateDeliveryStatus.jsp">Click Here to Update Delivery Status of Package</a>
 </body>
 </html>
