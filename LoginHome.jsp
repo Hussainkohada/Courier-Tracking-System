@@ -8,7 +8,10 @@
 <h1> Welcome To Login Page</h1>
 </head>
 <body>
-<a href="User/UserLoginPage.jsp">Click Here to Login as User</a>
-<a href="StaffAdmin/A_SLoginPage.jsp">Click Here to Login as Admin/Staff</a>
+<form action="Login_Register.jsp" method="post" > 
+<br/><a href="User/UserLoginPage.jsp">Click Here to Login as User</a>
+<br/><a href="StaffAdmin/A_SLoginPage.jsp">Click Here to Login as Admin/Staff</a>
+<br><input type="submit"  value="Go Back to Registeration Page" >
+</form>
 </body>
 </html>

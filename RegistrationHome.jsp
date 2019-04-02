@@ -8,7 +8,10 @@
 <h1> Welcome to registration Page</h1>
 </head>
 <body>
+<form action="LoginHome.jsp" method="post">
 <br><a href="User/UserReg.jsp">Click Here to Register as a User</a>
 <br><a href="StaffAdmin/Admin_StaffReg.jsp">Click Here to Register as Admin/Staff</a>
+<br> <input type="submit" value="Already a Member Click Here to Login" >
+</form>
 </body>
 </html>
