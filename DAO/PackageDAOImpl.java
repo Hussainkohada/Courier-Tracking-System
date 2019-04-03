@@ -74,15 +74,15 @@ public class PackageDAOImpl implements PackageDAO {
 				System.out.println("Exception : "+E);
 			}
 		}
-		
-	public Package getPackageById(int consgnid) throws SQLException, ClassNotFoundException{
+	@Override	
+	public Package getPackageByConsignId(int consgnid) throws SQLException, ClassNotFoundException{
 			Package obj=new Package();
 			try {
 				Connection con = ConnectionClass.getConnection();
 			    String qry="Select * from Package where Consignment_Id="+consgnid;
 			    Statement stmt=con.createStatement();
 			    ResultSet rs=stmt.executeQuery(qry);
-			    while(rs.next()) {
+			    if(rs.next()) { 
 			    	int consign_id=rs.getInt(1);
 			    	Date accept_date=rs.getDate(2);
 			    	float pack_Weight=rs.getFloat(3); 
@@ -94,6 +94,9 @@ public class PackageDAOImpl implements PackageDAO {
 					String curr_loc=rs.getString(9);
 					String pack_status=rs.getString(10);
 					obj=new Package(consign_id, accept_date, pack_Weight, cost, sender_addr, receiver_addr, emp_id, user_id, curr_loc, pack_status);
+			    }
+			    else {
+			    	return null;
 			    }
 			}catch(Exception E){
 				System.out.println("Exception : "+E);
@@ -182,6 +185,8 @@ public class PackageDAOImpl implements PackageDAO {
 		}								
 		return pack_List;
 	}
+	
+
 	
 	
 }

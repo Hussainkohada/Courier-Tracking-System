@@ -8,12 +8,13 @@
 <h1>Welcome to Login Page</h1>
 </head>
 <body>
-<form action="../RegistrationHome.jsp" method="post" id="xyz">
-<form action="../A_SLoginServlet" method="post" >
-<br> User Id : <input type="text" name="u_id" autocomplete="off">
+
+<form action="../A_SLoginServlet" method="post"  id="abc">
+<br> User Id/E-Mail Id : <input type="text" name="u_id" autocomplete="off">
 <br> Password : <input type="password" name="pwd">
-<br> <input type="submit" value="LogIn">
+<br> <input type="submit" value="LogIn" form="abc">
 </form>
+<form action="../RegistrationHome.jsp" method="post" id="xyz">
 <input type="submit" value="Not a Member. Click here to Register" form="xyz">
 </form>
 <%

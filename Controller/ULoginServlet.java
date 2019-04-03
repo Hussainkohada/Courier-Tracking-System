@@ -46,11 +46,11 @@ public class ULoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String u_id=request.getParameter("u_id");
 		String pwd=request.getParameter("pwd");
-		boolean resp=false;
+		boolean resp1=false,resp2=false;;
 		UserDAO dao=new UserDAOImpl();
-		resp=dao.checkLoginField(u_id, pwd);
-		
-		if(resp) {
+		resp1=dao.checkLoginFieldbyuserId(u_id, pwd);
+		resp2=dao.checkLoginFieldbyemail(u_id, pwd);
+		if(resp1 || resp2) {
 			User obj=new User();
 			try {
 				obj=dao.ViewUserbyId(u_id);

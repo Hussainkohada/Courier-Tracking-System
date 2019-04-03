@@ -10,6 +10,7 @@
 <body>
 <br/><a href="PackageBook.jsp">Click Here to Register Package</a>
 <br/><a href="UpdateDelivery_LocStatus.jsp">Click Here to Update Location &  Status of Package</a>
+<br/><a href="ShowStaffList.jsp">Click here to View and Edit Details of Staff Members</a>
 
 </body>
 </html>

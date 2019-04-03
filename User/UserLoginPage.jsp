@@ -8,22 +8,22 @@
 <h1>Welcome to Login Page</h1>
 </head>
 <body>
-<form action="../Login_Register.jsp" id="sbreg" method="post">
-<form action="../ULoginServlet" method="post">
-<br> User Id : <input type="text" name="u_id" autocomplete="off">
+ 
+<form action="../ULoginServlet" method="post" id="login">
+<br> User Id/E-Mail ID : <input type="text" name="u_id" autocomplete="off">
 <br> Password : <input type="password" name="pwd">
-<br> <input type="submit" value="LogIn">
+<br> <input type="submit" value="LogIn" form="login">
 </form>
+<form action="../Login_Register.jsp" id="sbreg" method="post">
 <input type="submit" value="Not a Member. Click here to Register" form="sbreg">
-</form >
+</form>
 <%
 String status="";
 if(request.getSession().getAttribute("login_status")!=null)
 {
 	status= request.getSession().getAttribute("login_status").toString();
-}
-	%>
+} %>
+<font color="red"><%=status%></font>	
 	
 	
-	<font color="red"><%=status%></font>
 </body>

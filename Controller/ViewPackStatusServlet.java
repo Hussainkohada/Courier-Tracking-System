@@ -8,21 +8,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import Model.Package;
 import DAO.PackageDAO;
 import DAO.PackageDAOImpl;
 
 /**
- * Servlet implementation class UpdateStatusServlet
+ * Servlet implementation class ViewPackStatus
  */
-@WebServlet("/UpdateStatusServlet")
-public class UpdateStatusServlet extends HttpServlet {
+@WebServlet("/ViewPackStatusServlet")
+public class ViewPackStatusServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UpdateStatusServlet() {
+    public ViewPackStatusServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,18 +39,18 @@ public class UpdateStatusServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int Consign_id=Integer.parseInt(request.getParameter("Consign_id"));
-		String Status=request.getParameter("pack_Status");
-		String location=request.getParameter("curr_Loc");
-		PackageDAO p_obj=new PackageDAOImpl();
+		// TODO Auto-generated method stub
+		int id=Integer.parseInt(request.getParameter("consign_id"));
+		PackageDAO dao=new PackageDAOImpl();
+		Package obj=new Package();
 		try {
-			p_obj.update_StatusofPackage(Status,Consign_id);
-			p_obj.update_locationofPackage(location,Consign_id);
+			obj=dao.getPackageByConsignId(id);
+			System.out.println("Recieved package object");
 		} catch (ClassNotFoundException | SQLException e) {
-				System.out.println("Exception : "+e);
 			e.printStackTrace();
 		}
-		response.sendRedirect("StaffAdmin/UpdateDelivery_LocStatus.jsp");
+		request.getSession().setAttribute("ConsignDet", obj);
+		response.sendRedirect("User/UserHome.jsp");
 	}
 
 }

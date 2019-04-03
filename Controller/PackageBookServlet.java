@@ -61,8 +61,12 @@ public class PackageBookServlet extends HttpServlet {
 		 String Receiver_addr=request.getParameter("Receiver_addr");
 		 int Emp_id=Integer.parseInt(request.getParameter("Emp_id"));
 		 int User_id=Integer.parseInt(request.getParameter("User_id"));
-		 String Curr_loc="N/A";
-		 String Pack_status="N/A";
+		 String Curr_loc=request.getParameter("curr_Loc");
+		 String Pack_status=null;
+		 if(request.getParameter("pack_Status")==null) {
+			 Pack_status="Nil";
+		 }
+		 else {Pack_status=request.getParameter("pack_Status");}
 		 Package p_obj=new Model.Package(Consign_id, Accept_date, Pack_Weight, Cost, Sender_addr, Receiver_addr, Emp_id, User_id, Curr_loc, Pack_status);
 		 
 		 try {

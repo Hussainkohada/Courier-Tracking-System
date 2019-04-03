@@ -15,6 +15,7 @@
 <br/> Last Name  :   <input type="text" name="L_name">
 <br/> Gender  :  <input type="radio" name="Gender" value="Male" checked> Male
   							<input type="radio" name="Gender" value="Female"> Female<br/>
+  							<input type="radio" name="Gender" value="Other"> Other<br/>
 <br/> Email  :   <input type="Email" name="E_Mail">
 <br/> Contact Number  :   <input type="text" name="Contact_num">
 <br/> User Id  :   <input type="text" name="userId">

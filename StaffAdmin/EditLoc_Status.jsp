@@ -14,7 +14,7 @@
 <%
 int id=Integer.parseInt(request.getParameter("Consign_id"));
 Package p_obj=new Package();
-p_obj=new PackageDAOImpl().getPackageById(id);
+p_obj=new PackageDAOImpl().getPackageByConsignId(id);
 %>
 <table border=2px;>
 <th>Consignment ID</th><th>Accept Date</th>
@@ -32,7 +32,7 @@ p_obj=new PackageDAOImpl().getPackageById(id);
  <td> <input type="text" name="Receiver_addr" value="<%=p_obj.getReceiver_addr() %>" readonly></td>
 <td> <input type="text" name="Emp_id" value="<%=p_obj.getEmp_id() %>" readonly></td>
 <td> <input type="text" name="User_id" value="<%=p_obj.getUser_id() %>" readonly></td>
-<td> <input type="text" value="Chennai" name="curr_Loc" ></td>
+<td> <input type="text"  name="curr_Loc"  value="<%=p_obj.getCurr_loc() %>" ></td>
 <td><br/> Package Status : <input list="Status"  name="pack_Status" >
 								<datalist id="Status">
 								<option value="Booked">

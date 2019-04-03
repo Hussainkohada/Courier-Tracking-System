@@ -113,8 +113,8 @@ public List<User> ListAllUsers() throws ClassNotFoundException, SQLException{
 	}
 
 @Override
-public boolean checkLoginField(String u_id, String pwd) {
-	{
+public boolean checkLoginFieldbyuserId(String u_id, String pwd) {
+	
 		boolean resp=false;
 
 		try{
@@ -134,10 +134,33 @@ public boolean checkLoginField(String u_id, String pwd) {
 			System.out.println("Error : "+E);
 		}
 	    return resp;
-	}
-
+	
 }
 
+@Override
+public boolean checkLoginFieldbyemail(String emailid, String pwd) {
+	
+	boolean resp=false;
+
+	try{
+		Connection con = ConnectionClass.getConnection();
+	    String qry="Select Email,Password from User where Email='"+emailid+"'";
+	    Statement stmt=con.createStatement();
+	    ResultSet rs=stmt.executeQuery(qry);
+	    rs.next();
+	    String mail_id=rs.getString(1);
+	    String cpwd=rs.getString(2);
+	    
+	    if(mail_id.equals(emailid) && cpwd.equals(pwd)) {
+	    	resp=true;
+	    }
+	    else resp=false;  
+	}catch(Exception E) {
+		System.out.println("Error : "+E);
+	}
+    return resp;
+
+}
 @Override
 public int getCustomerId() {
 	int id=0;
@@ -170,4 +193,6 @@ public int getCustomerId(User obj) {
 	}
 	return id;
 }
+
+
 }

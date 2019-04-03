@@ -44,17 +44,21 @@ public class A_SLoginServlet extends HttpServlet {
 			String u_id=request.getParameter("u_id");
 			String pwd=request.getParameter("pwd");
 			
-			boolean resp=false;
+			boolean resp1=false,resp2=false;
 			Staff_AdminDAO dao=new Staff_AdminDAOImpl();
-			resp=dao.checkLoginField(u_id, pwd);
+			resp1=dao.checkLoginFieldbyUserID(u_id, pwd);
 			
-			if(resp) {
+			resp2=dao.checkLoginFieldbyEmailID(u_id, pwd);
+			
+			if(resp1 || resp2) {
 				Staff_Admin obj=new Staff_Admin();
-				try {
-					obj=dao.getSADetbyId(u_id);
+				try { if(resp1) {
+					obj=dao.getSADetbyId(u_id);}
+				else obj=dao.getSADetbyEmailId(u_id);
 					System.out.println("Recieved Object");
 					if(obj.getLogin_type().equals("A"))	response.sendRedirect("StaffAdmin/AdminHome.jsp");
 					else response.sendRedirect("StaffAdmin/StaffHome.jsp");
+					request.getSession().setAttribute("staffdet", obj);
 				} catch (ClassNotFoundException | SQLException e) {
 				System.out.println("Exception : "+e);
 					e.printStackTrace();
