@@ -9,11 +9,14 @@
 </head>
 <body>
 
+<%
+request.getSession().setAttribute("key2", "Staff");
+%>
 <br/> <a href="PackageBook.jsp">Click Here to Register Package</a>
 <br/> <a href="UpdateDelivery_LocStatus.jsp">Click Here to Update Delivery Status of Package</a>	
 
-
-
-
+<form action="A_SLoginPage.jsp">
+<br/> <input type="submit" value="logout">
+</form>
 </body>
 </html>

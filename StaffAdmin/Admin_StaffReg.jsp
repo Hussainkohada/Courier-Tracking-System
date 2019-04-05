@@ -9,7 +9,7 @@
 </head>
 <body>
 
-<form action="../Admin_StaffServlet" method="post">
+<form action="../ValidateIdandmailSA" method="post">
 <br/> <h1>Fill the below Fields</h1>
 <br/> First Name  :   								<input type="text" name="F_name">
 <br/> Last Name  :   								<input type="text" name="L_name">
@@ -23,8 +23,22 @@
 <br/> Designation  :   							<input type="text" name="Designation">
 <br/> Permanent Address  :   				<input type="text" name="Pmt_Address">
 <br/> Correspondence Address  :   		<input type="text" name="Corresp_Address">
+
+<%if(request.getSession().getAttribute("TypeStaff").equals("StaffReg")) {%>
+<br/> Login Type  : (A-Admin S-Staff)<input type="text" value="S" name="Login_type"  readonly>
+<%request.getSession().setAttribute("TypeStaff","nil"); %>
+
+<% request.getSession().setAttribute("TypeStaff","nil");} else { %>
 <br/> Login Type  : (A-Admin S-Staff)<input type="text" name="Login_type">
+<%}%>
+
 <br/> <input type="submit" Value="Register" />
+<%if(request.getSession().getAttribute("Flagsa") ==null) {%>
+
+	<%}else{
+		%> <b>Email Id/User Already exist</b> <%		}
+		%>
+
 </form>
 </body>
 </html>

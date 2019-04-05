@@ -9,15 +9,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Staff List</title>
-<h1> Details Of Your Staff Members</h1>
+<title>Deleting</title>
 </head>
 <body>
+<h3>Click on the delete Staff Details</h3>
 <%
 List<Staff_Admin> S_List=new ArrayList<>();
 Staff_AdminDAO dao=new Staff_AdminDAOImpl();
 S_List=dao.SA_ViewDet();
 %>
+
 <table border=2px;>
 <th>First Name</th><th>Last Name</th>
 <th>Gender</th><th>Email</th>
@@ -26,8 +27,8 @@ S_List=dao.SA_ViewDet();
 <th>Designation</th><th>Permanent Address</th>
 <th>Correspondance Address</th>
 <%for(Staff_Admin sa_obj:S_List) {%>
-
 <tr>
+<% %>
 <td><%=sa_obj.getF_name() %></td>
 <td><%=sa_obj.getL_name() %></td>
 <td><%=sa_obj.getGender()%></td>
@@ -39,11 +40,11 @@ S_List=dao.SA_ViewDet();
 <td><%=sa_obj.getDesignation()%></td>
 <td><%=sa_obj.getPmt_Address()%></td>
 <td><%=sa_obj.getCorresp_Address()%></td>
-<td><a href="EditStaffDet.jsp?User_Id=<%=sa_obj.getUserId()%>">Edit</a>
-
+<td><a href="../DeleteStaffServlet?u_id=<%=sa_obj.getUserId() %>">Delete</a>
 </tr>			
-<%} %>				
-
-</table>
+<%} %>	
+<br><form action="AdminHome.jsp">
+<input type="submit" value="Go to Home Page">
+</form>
 </body>
 </html>

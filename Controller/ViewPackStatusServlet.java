@@ -49,7 +49,11 @@ public class ViewPackStatusServlet extends HttpServlet {
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
-		request.getSession().setAttribute("ConsignDet", obj);
+		if(obj==null) {
+		request.getSession().setAttribute("ConsignDet", null);}
+		else {
+			request.getSession().setAttribute("ConsignDet", obj);
+		}
 		response.sendRedirect("User/UserHome.jsp");
 	}
 

@@ -11,30 +11,36 @@
 <h1> Welcome Home</h1>
 </head>
 <body>
-
+<%int id=Integer.parseInt(request.getSession().getAttribute("cust_id").toString());%>
+<h1> Customer Id:     <%=id %></h1>
+<br/>
 <form action="../ViewPackStatusServlet" method="post">
-<br/>Enter Consignment id : <input type="text" name="consign_id">
+<br/>Enter Consignment id : <input type="text" name="consign_id" required>
 <br/> <input type="submit" value="Check Status">
 </form>
-<br/><br/><br/><br/><br/><br/><br/>
-<%
-Package p_obj=null;
-String status="";
-int flag=0;
-if(request.getSession().getAttribute("ConsignDet")!=null)
-{ System.out.println("Package Found");
+
+
+
+	<%Package p_obj=null; 
+	String status=""; 
+	int flag=0; 
+	if(request.getSession().getAttribute("ConsignDet")!=null)
+	{ System.out.println("Package Found");
 	flag=1;
 	p_obj=(Package) request.getSession().getAttribute("ConsignDet");
-	%>
-	<table border=2px;>
-	<th>Consignment ID</th><th>Accept Date</th>
-	<th>Package Weight</th><th>Cost</th>
-	<th>Sender Address</th><th>Reciever Address</th>
-	<th>Employee Id</th><th>User Id</th>
-	<th>Current Location</th><th>Package Status</th>
-	<th>Update Status</th>
+%>
 	<form action="UserHome.jsp" >
-	<tr><td><input type="text" name="Consign_id" value="<%=p_obj.getConsign_id() %>"readonly></td>
+	<table border=2px>
+	
+	<th>Consignment ID</th> <th>Accept Date</th>
+	<th>Package Weight</th> <th>Cost</th>
+	<th>Sender Address</th> <th>Receiver Address</th>
+	<th>Employee Id</th>  <th>User Id</th>
+	<th>Current Location</th> <th>Package Status</th>
+	<th>Update Status</th>
+	
+	<tr>
+	<td><input type="text" name="Consign_id" value="<%=p_obj.getConsign_id() %>"readonly></td>
 	 <td><input type="date" name="Accept_date" value="<%=p_obj.getAccept_date() %>" readonly></td>
 	 <td><input type="text" name="Pack_Weight" value="<%=p_obj.getPack_Weight() %>" readonly></td>
 	<td> <input type="text" name="Cost" value="<%=p_obj.getCost() %>" readonly></td>
@@ -45,15 +51,19 @@ if(request.getSession().getAttribute("ConsignDet")!=null)
 	<td> <input type="text" name="curr_Loc" value="<%=p_obj.getCurr_loc() %>" readonly></td>
 	<td><input type="text" name="Status" value="<%=p_obj.getPack_status() %>" readonly></td>								
 	</tr>	
-	<input type="submit" value="Go to Home Page">
-	</form>
-	</table>
-	<%}else{
-        System.out.println("Package Not Found");
-		status="No Pacakge Found";
-		 %> 
-		<p>Status : <%=status %></p>
-		<%} %>
 
+	
+</table>
+
+<input type="submit" value="Go to Home Page">
+</form>
+<%} else {	      
+        System.out.println("Package Not Found");
+		status="No Pacakge Found";%> 
+		<p>Status : <%=status %></p>
+		<%} %>	
+	<form action="UserLoginPage.jsp">
+<br/> <input type="submit" value="logout">
+</form>
 </body>
 </html>

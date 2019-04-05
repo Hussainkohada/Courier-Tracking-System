@@ -33,5 +33,13 @@ int id=dao.getEmployeeId(obj);
 
 <br/> <input type="submit" Value="Book" />
  </form>
+ 
+ <% if(request.getSession().getAttribute("CustId")==null){%>
+ <%}else if(request.getSession().getAttribute("CustId").equals("Incorrect")){ %>
+ Invalid Customer Id Please Enter Again
+ <% }%>
+ 
+ 
+ 
 </body>
 </html>

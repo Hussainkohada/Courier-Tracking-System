@@ -11,9 +11,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.ws.Response;
 
 import DAO.PackageDAO;
 import DAO.PackageDAOImpl;
+import DAO.UserDAO;
+import DAO.UserDAOImpl;
 
 /**
  * Servlet implementation class PackageRegServlet
@@ -61,6 +64,10 @@ public class PackageBookServlet extends HttpServlet {
 		 String Receiver_addr=request.getParameter("Receiver_addr");
 		 int Emp_id=Integer.parseInt(request.getParameter("Emp_id"));
 		 int User_id=Integer.parseInt(request.getParameter("User_id"));
+		 
+		 UserDAO dao=new UserDAOImpl();
+		 boolean resp=dao.validatecustomerId(User_id);
+		 if(resp) {	 
 		 String Curr_loc=request.getParameter("curr_Loc");
 		 String Pack_status=null;
 		 if(request.getParameter("pack_Status")==null) {
@@ -77,7 +84,14 @@ public class PackageBookServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		 if(request.getSession().getAttribute("key2").equals("Staff"))
 	response.sendRedirect("StaffAdmin/StaffHome.jsp");
+		 else response.sendRedirect("StaffAdmin/AdminHome.jsp");
 	}
-
+	
+	else {
+		request.getSession().setAttribute("CustId", "Incorrect");
+		response.sendRedirect("StaffAdmin/PackageBook.jsp");
+	}
+	}
 }

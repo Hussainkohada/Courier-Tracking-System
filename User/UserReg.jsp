@@ -8,8 +8,10 @@
 <h1>Welcome To User Registration Portal</h1>
 </head>
 <body>
-
-<form action="../UserRegisterServlet" method="post">
+<%
+System.out.println("Entering Registration Form");
+%>
+<form action="../ValidateIdandmailU" method="post">
 <br/> <h1>Fill the below Fields</h1><p></p>
 <br/> First Name  :   <input type="text" name="F_name">
 <br/> Last Name  :   <input type="text" name="L_name">
@@ -19,10 +21,15 @@
 <br/> Email  :   <input type="Email" name="E_Mail">
 <br/> Contact Number  :   <input type="text" name="Contact_num">
 <br/> User Id  :   <input type="text" name="userId">
-<br/> Password  :   <input type="password" name="Password">
 
+<br/> Password  :   <input type="password" name="Password">
+<%System.out.println("Acquired Details");%>
 <br/> <input type="submit" Value="Register" />
 
 </form>
+<%if(request.getSession().getAttribute("Flagu") ==null) {%>
+
+	<%}else{%>
+	 <b>Email Id/User Already exist</b> <%}%>
 </body>
 </html>

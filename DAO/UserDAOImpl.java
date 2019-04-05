@@ -6,12 +6,13 @@ import java.util.*;
 import java.sql.*;
 public class UserDAOImpl implements UserDAO {
 
-public void Create_UserDet(User u_obj) throws ClassNotFoundException, SQLException {
+public int Create_UserDet(User u_obj) throws ClassNotFoundException, SQLException {
+	int id=0;
 	try { 
 		Connection con = ConnectionClass.getConnection();
 		String qry="Insert into User values(?,?,?,?,?,?,?,?)";
 		PreparedStatement ps=con.prepareStatement(qry);
-		int id=getCustomerId()+1;
+		id=getCustomerId()+1;
 		ps.setInt(1, id);
 		ps.setString(2, u_obj.getF_name());
 		ps.setString(3, u_obj.getL_name());
@@ -29,6 +30,7 @@ public void Create_UserDet(User u_obj) throws ClassNotFoundException, SQLExcepti
 	catch(Exception E) {
 		System.out.println("Error: "+E);
 	}
+	return id; 
 }
 
 public void Update_UserDet(User u_obj)  throws ClassNotFoundException, SQLException{
@@ -192,6 +194,44 @@ public int getCustomerId(User obj) {
 		System.out.println("Exception : "+E);
 	}
 	return id;
+}
+
+public boolean validateidandmail(String u_id, String email) {
+	boolean resp=false;
+	try { boolean resp1=false,resp2=false;
+		Connection con = ConnectionClass.getConnection();
+		String qry="Select UserId  from user where UserId='"+u_id+"'";
+		Statement stmt=con.createStatement();
+		ResultSet rs=stmt.executeQuery(qry);
+		if(rs.next()) resp1=true;
+		rs.close();
+		String qry1="Select Email  from user where Email='"+email+"'";
+		Statement stmt1=con.createStatement();
+		ResultSet rs1=stmt1.executeQuery(qry1);
+		if(rs1.next()) resp2=true;
+		rs1.close();
+		if(resp1==true || resp2==true) resp=false;
+		else resp=true;
+	}catch(Exception E) {
+		System.out.println("Error at Validation");
+	}
+	return resp;
+}
+
+@Override
+public boolean validatecustomerId(int id) {
+	boolean resp=false;
+		try {
+		Connection con = ConnectionClass.getConnection();
+		String qry="Select Customer_Id from user where Customer_Id="+id;
+		Statement stmt=con.createStatement();
+		ResultSet rs=stmt.executeQuery(qry);
+		rs.next();
+		if(id==rs.getInt(1))resp=true;
+	}catch(Exception E) {
+		System.out.println("Exception : "+E);
+	}
+	return resp;
 }
 
 

@@ -89,7 +89,7 @@ public class Staff_AdminDAOImpl implements Staff_AdminDAO {
 				String corresp_Address=rs.getString(12);
 				String login_type=rs.getString(13);
 				obj=new Staff_Admin(f_name, l_name, gender, e_Mail, contact_num, userId, password, salary, designation, pmt_Address, corresp_Address, login_type);
-		    }
+		    }con.close();
 		}catch(Exception E) {
 			System.out.println("Exception E");
 		}
@@ -117,6 +117,7 @@ public class Staff_AdminDAOImpl implements Staff_AdminDAO {
 				String login_type=rs.getString(13);
 				obj=new Staff_Admin(f_name, l_name, gender, e_Mail, contact_num, userId, password, salary, designation, pmt_Address, corresp_Address, login_type);
 		    }
+		    con.close();
 		}catch(Exception E) {
 			System.out.println("Exception E");
 		}
@@ -168,6 +169,7 @@ public class Staff_AdminDAOImpl implements Staff_AdminDAO {
 		    	resp=true;
 		    }
 		    else resp=false;
+		    con.close();
 		}catch(Exception E) {
 			System.out.println("Error : "+E);
 		}
@@ -189,6 +191,7 @@ public class Staff_AdminDAOImpl implements Staff_AdminDAO {
 		    	resp=true;
 		    }
 		    else resp=false;
+		    con.close();
 		}catch(Exception E) {
 			System.out.println("Error : "+E);
 		}
@@ -204,7 +207,8 @@ public class Staff_AdminDAOImpl implements Staff_AdminDAO {
 			rs.last();
 			id=rs.getInt(1);
 			if(id==0) id=29200114;
-			}catch(Exception E) {
+			con.close();
+		}catch(Exception E) {
 			System.out.println("Exception : "+E);
 		}
 	return id;
@@ -218,9 +222,46 @@ public class Staff_AdminDAOImpl implements Staff_AdminDAO {
 				ResultSet rs=stmt.executeQuery(qry);
 				rs.last();
 				id=rs.getInt(1);
+				con.close();
 				}catch(Exception E) {
 				System.out.println("Exception : "+E);
 			}
 		return id;
 		}
+	@Override
+	public void deleteStaff(String u_id) {
+		try {
+			Connection con = ConnectionClass.getConnection();
+			String qry="Delete from staff_admin where UserId='"+u_id+"'";
+			Statement stmt=con.createStatement();
+			stmt.executeUpdate(qry);
+			con.close();
+			
+		}catch(Exception E) {
+			System.out.println("Error during Deleting");
+		}
+		
+	}
+	@Override
+	public boolean validateidandmail(String u_id, String email) {
+		boolean resp=false;
+		try { boolean resp1=false,resp2=false;
+			Connection con = ConnectionClass.getConnection();
+			String qry="Select UserId  from staff_admin where UserId='"+u_id+"'";
+			Statement stmt=con.createStatement();
+			ResultSet rs=stmt.executeQuery(qry);
+			if(rs.next()) resp1=true;
+			rs.close();
+			String qry1="Select Email  from staff_admin where Email='"+email+"'";
+			Statement stmt1=con.createStatement();
+			ResultSet rs1=stmt1.executeQuery(qry1);
+			if(rs1.next()) resp2=true;
+			rs1.close();
+			if(resp1==true || resp2==true) resp=false;
+			else resp=true;
+		}catch(Exception E) {
+			System.out.println("Error at Validation");
+		}
+		return resp;
+	}
 }

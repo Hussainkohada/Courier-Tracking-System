@@ -36,5 +36,16 @@ pack_list=new PackageDAOImpl().getAllPackages();
 		<td><a href="EditLoc_Status.jsp?Consign_id=<%=p_obj.getConsign_id()%>">Update</a>
 </tr>	
 <%} %>
+</table>
+<% if(request.getSession().getAttribute("key2").equals("Admin")) {%>
+<form action="AdminHome.jsp" >
+<input type="submit" value="Go to Home Page">
+ </form>
+ <%}else{ %>
+<form action="StaffHome.jsp" >
+<input type="submit" value="Go to Home Page">
+</form>
+  <%} %>
+
 </body>
 </html>

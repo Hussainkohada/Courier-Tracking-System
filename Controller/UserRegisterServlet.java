@@ -33,14 +33,14 @@ public class UserRegisterServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.getWriter().append("Served at: UserRegisterServletGetMethod").append(request.getContextPath());
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		String F_name=request.getParameter("F_name");
 		String L_name=request.getParameter("L_name");
 		String Gender=request.getParameter("Gender");
@@ -50,12 +50,14 @@ public class UserRegisterServlet extends HttpServlet {
 		String Password=request.getParameter("Password");
 		User u_obj=new User(F_name, L_name, Gender, E_Mail, Contact_num, userId, Password);
 		UserDAO u_dao=new UserDAOImpl();
+		int customerid=0;
 		try {
-			u_dao.Create_UserDet(u_obj);
+			customerid=u_dao.Create_UserDet(u_obj);
 			System.out.println("User Created");
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
+		
 		response.sendRedirect("User/UserLoginPage.jsp");
 	}
 
